@@ -1,0 +1,27 @@
+[project]
+name = "relosy"
+version = "0.1.0"
+description = "Check that two folders match and keep them in sync, locally or over ssh"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+dependencies = ["tomli>=1.1; python_version < '3.11'"]
+
+[project.scripts]
+relosy = "remote_local_sync.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.hatch.build.targets.wheel]
+# The import package is named after the project, not the product, so renaming
+# the product (the distribution and command names above) never moves the code.
+packages = ["src/remote_local_sync"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
